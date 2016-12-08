@@ -120,7 +120,7 @@ RUN set -x \
 # IMPORTANT: If the version of Go is updated, the Windows to Linux CI machines
 #            will need updating, to avoid errors. Ping #docker-maintainers on IRC
 #            with a heads-up.
-ENV GO_VERSION 1.6.3
+ENV GO_VERSION 1.6.4
 
 # Compile Go for cross compilation
 ENV DOCKER_CROSSPLATFORMS \
@@ -253,7 +253,7 @@ RUN set -x \
 	&& rm -rf "$GOPATH"
 
 # Install containerd
-ENV CONTAINERD_COMMIT b818e749726ba18e430bb825396c85408dfaf2a4
+ENV CONTAINERD_COMMIT 2a5e70cbf65457815ee76b7e5dd2a01292d9eca8
 RUN set -x \
 	&& export GOPATH="$(mktemp -d)" \
 	&& git clone https://github.com/docker/containerd.git "$GOPATH/src/github.com/docker/containerd" \

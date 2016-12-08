@@ -49,6 +49,9 @@ for version in "${versions[@]}"; do
 			echo "RUN yum install -y kernel-uek-devel-4.1.12-32.el6uek"  >> "$version/Dockerfile"
 			echo >> "$version/Dockerfile"
 			;;
+		fedora:*)
+			echo "RUN ${installer} -y upgrade" >> "$version/Dockerfile"
+			;;
 		*) ;;
 	esac
 
@@ -128,6 +131,10 @@ for version in "${versions[@]}"; do
 
 			# use zypper
 			echo "RUN zypper --non-interactive install ${packages[*]}" >> "$version/Dockerfile"
+			;;
+		centos:7)
+			echo "RUN ${installer} install -y ${packages[*]}" >> "$version/Dockerfile"
+			echo 'RUN [ `rpm -q selinux-policy-devel | grep el7_3` ] || yum -y --enablerepo=cr install selinux-policy-devel' >> "$version/Dockerfile"
 			;;
 		*)
 			echo "RUN ${installer} install -y ${packages[*]}" >> "$version/Dockerfile"
